@@ -207,6 +207,14 @@ void ui::initStrings()
     addUIString("settingsMenu", 20, "Animation Scale: ");
     addUIString("settingsMenu", 21, "Auto-upload to Drive/Webdav: ");
 
+    // MCStarrySky start - jksv webdav settings
+    addUIString("settingsMenu", 22, "Set WebDAV origin");
+    addUIString("settingsMenu", 23, "Set WebDAV basepath");
+    addUIString("settingsMenu", 24, "Set WebDAV username");
+    addUIString("settingsMenu", 25, "Set WebDAV password");
+    addUIString("settingsMenu", 26, "Click to save WebDAV configuration and try to reconnect");
+    // MCStarrySKy end
+
     //Main menu
     addUIString("mainMenuSettings", 0, "Settings");
     addUIString("mainMenuExtras", 0, "Extras");
@@ -292,6 +300,7 @@ void ui::initStrings()
     addUIString("popRemoteNotActive", 0, "Remote is not available");
     addUIString("popWebdavStarted", 0, "Webdav started successfully.");
     addUIString("popWebdavFailed", 0, "Failed to start Webdav.");
+    addUIString("popWebdavFirstRun", 0, "Please go to settings to configure Webdav for first running.");
 
     //Keyboard hints
     addUIString("swkbdEnterName", 0, "Enter a new name");
@@ -303,6 +312,11 @@ void ui::initStrings()
     addUIString("swkbdMkDir", 0, "Enter a folder name");
     addUIString("swkbdNewSafeTitle", 0, "Input New Output Folder");
     addUIString("swkbdExpandSize", 0, "Enter New Size in MB");
+
+    addUIString("swkbdWebdavOrigin", 0, "Enter a new WebDAV origin");
+    addUIString("swkbdWebdavBasepath", 0, "Enter a new WebDAV basepath");
+    addUIString("swkbdWebdavUsername", 0, "Enter a new WebDAV username");
+    addUIString("swkbdWebdavPassword", 0, "Enter a new WebDAV password");
 
     //Status informations
     addUIString("infoStatus", 0, "TID: %016lX");

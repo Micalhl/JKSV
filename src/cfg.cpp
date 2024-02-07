@@ -346,6 +346,30 @@ static void loadDriveConfig()
             cfg::webdavPassword = json_object_get_string(password);
         }
     }
+    else
+    {
+        json_object *webdavNewJSON = json_object_new_object();
+        json_object_object_add(webdavNewJSON, "origin", json_object_new_string("http:\/\/write.your.link.here"));
+        json_object_object_add(webdavNewJSON, "basepath", json_object_new_string("dav"));
+        json_object_object_add(webdavNewJSON, "username", json_object_new_string("username"));
+        json_object_object_add(webdavNewJSON, "password", json_object_new_string("password"));
+        json_object_to_file("/config/JKSV/webdav.json", webdavNewJSON);
+
+        cfg::webdavOrigin = "http:\/\/write.your.link.here";
+        cfg::webdavBasePath = "dav";
+        cfg::webdavUser = "username";
+        cfg::webdavPassword = "password";
+    }
+}
+
+void cfg::saveWebdavConfig()
+{
+    json_object *webdavNewJSON = json_object_new_object();
+    json_object_object_add(webdavNewJSON, "origin", json_object_new_string(cfg::webdavOrigin.c_str()));
+    json_object_object_add(webdavNewJSON, "basepath", json_object_new_string(cfg::webdavBasePath.c_str()));
+    json_object_object_add(webdavNewJSON, "username", json_object_new_string(cfg::webdavUser.c_str()));
+    json_object_object_add(webdavNewJSON, "password", json_object_new_string(cfg::webdavPassword.c_str()));
+    json_object_to_file("/config/JKSV/webdav.json", webdavNewJSON);
 }
 
 void cfg::loadConfig()
@@ -528,4 +552,6 @@ void cfg::saveConfig()
 
     if(!pathDefs.empty())
         savePathDefs();
+
+    saveWebdavConfig();
 }

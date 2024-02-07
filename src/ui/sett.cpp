@@ -231,6 +231,57 @@ static void toggleOpt(void *a)
         case 21:
             toggleBool(cfg::config["autoUpload"]);
             break;
+
+        case 22:
+        {
+            std::string origin = util::getStringInput(SwkbdType_ZhHans, cfg::webdavOrigin, ui::getUIString("swkbdWebdavOrigin", 0), 64, 0, NULL);
+            if(!origin.empty())
+            {
+                cfg::webdavOrigin = origin;
+            }
+        }
+            break;
+
+        case 23:
+        {
+            std::string basepath = util::getStringInput(SwkbdType_ZhHans, cfg::webdavBasePath, ui::getUIString("swkbdWebdavBasepath", 0), 64, 0, NULL);
+            if(!basepath.empty())
+            {
+                cfg::webdavBasePath = basepath;
+            }
+        }
+            break;
+
+        case 24:
+        {
+            std::string username = util::getStringInput(SwkbdType_ZhHans, cfg::webdavUser, ui::getUIString("swkbdWebdavUsername", 0), 64, 0, NULL);
+            if (!username.empty())
+            {
+                cfg::webdavUser = username;
+            }
+        }
+            break;
+
+        case 25:
+        {
+            std::string password = util::getStringInput(SwkbdType_QWERTY, "", ui::getUIString("swkbdWebdavPassword", 0), 64, 0, NULL);
+            if (!password.empty())
+            {
+                cfg::webdavPassword = password;
+            }
+        }
+            break;
+
+        case 26:
+            cfg::saveWebdavConfig();
+            if (!util::isApplet())
+            {
+                fs::remoteExit();
+                fs::remoteInit();
+            }
+            else
+                ui::showMessage(ui::getUICString("appletModeWarning", 0));
+            break;
     }
 }
 
@@ -272,7 +323,7 @@ void ui::settInit()
 
     optHelpX = 1220 - gfx::getTextWidth(ui::getUICString("helpSettings", 0), 18);
 
-    for(unsigned i = 0; i < 22; i++)
+    for(unsigned i = 0; i < 27; i++)
     {
         ui::settMenu->addOpt(NULL, ui::getUIString("settingsMenu", i));
         ui::settMenu->optAddButtonEvent(i, HidNpadButton_A, toggleOpt, NULL);

@@ -4,6 +4,7 @@
 #include "webdav.h"
 #include "cfg.h"
 #include "ui.h"
+#include "util.h"
 
 rfs::IRemoteFS *fs::rfs = NULL;
 std::string fs::rfsRootID;
@@ -109,7 +110,7 @@ void fs::webDavInit() {
         return;
 
     if (cfg::webdavOrigin.empty())
-        return;
+        cfg::webdavOrigin = "http:\/\/write.your.link.here";
 
     rfs::WebDav *webdav = new rfs::WebDav(cfg::webdavOrigin,
                                           cfg::webdavUser,
@@ -119,14 +120,27 @@ void fs::webDavInit() {
     rfsRootID = webdav->getDirID(JKSV_DRIVE_FOLDER, baseId);
 
     // check access
-    if (!webdav->dirExists(JKSV_DRIVE_FOLDER, baseId)) // this could return false on auth/config related errors
+    if (!webdav->dirExists(JKSV_DRIVE_FOLDER, baseId)) // this could return false on auth/config related errors // FIXME: 不完全行
     {
         if (!webdav->createDir(JKSV_DRIVE_FOLDER, baseId))
         {
             delete webdav;
+            if (cfg::webdavOrigin == "http:\/\/write.your.link.here" && cfg::webdavBasePath == "dav" && cfg::webdavUser == "username" && cfg::webdavPassword == "password")
+            {
+                ui::showPopMessage(POP_FRAME_DEFAULT, ui::getUICString("popWebdavFirstRun", 0));
+                return;
+            }
             ui::showPopMessage(POP_FRAME_DEFAULT, ui::getUICString("popWebdavFailed", 0));
             return;
         }
+    }
+
+    // check if login
+    if (webdav->getListWithParent(baseId).empty())
+    {
+        delete webdav;
+        ui::showPopMessage(POP_FRAME_DEFAULT, ui::getUICString("popWebdavFailed", 0));
+        return;
     }
 
     rfs = webdav;
