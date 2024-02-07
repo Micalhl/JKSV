@@ -325,7 +325,7 @@ void ui::fldPopulateMenu()
 
         for(unsigned i = 0; i < driveFldList.size(); i++, fldInd++)
         {
-            rfs::RfsItem rI = driveFldList[i];
+            // rfs::RfsItem rI = driveFldList[i];
 
             // FIXME
             // fs::logWrite("StarrySky WebDAV: RfsItem's name is: %s\n", rI.name.c_str());
@@ -336,11 +336,11 @@ void ui::fldPopulateMenu()
 
             // fldMenu->addOpt(NULL, "R: " + driveFldList[i].name);
 
-            fldMenu->addOpt(NULL, ui::getUIString("restoreSymbol", 0) + util::getFilenameFromPath(rI.id));
+            fldMenu->addOpt(NULL, ui::getUIString("restoreSymbol", 0) + driveFldList[i].name);
 
-            fldMenu->optAddButtonEvent(fldInd, HidNpadButton_A, fldFuncDownload, &rI);
-            fldMenu->optAddButtonEvent(fldInd, HidNpadButton_X, fldFuncDriveDelete, &rI);
-            fldMenu->optAddButtonEvent(fldInd, HidNpadButton_Y, fldFuncDriveRestore, &rI);
+            fldMenu->optAddButtonEvent(fldInd, HidNpadButton_A, fldFuncDownload, &driveFldList[i]);
+            fldMenu->optAddButtonEvent(fldInd, HidNpadButton_X, fldFuncDriveDelete, &driveFldList[i]);
+            fldMenu->optAddButtonEvent(fldInd, HidNpadButton_Y, fldFuncDriveRestore, &driveFldList[i]);
         }
     }
 
@@ -379,13 +379,13 @@ void ui::fldRefreshMenu()
 
         for(unsigned i = 0; i < driveFldList.size(); i++, fldInd++)
         {
-            rfs::RfsItem rI = driveFldList[i];
-            fldMenu->addOpt(NULL, ui::getUIString("restoreSymbol", 0) + util::getFilenameFromPath(rI.id));
+            // rfs::RfsItem rI = driveFldList[i];
+            fldMenu->addOpt(NULL, ui::getUIString("restoreSymbol", 0) + driveFldList[i].name);
             // fldMenu->addOpt(NULL, "[R] " + driveFldList[i].name);
 
-            fldMenu->optAddButtonEvent(fldInd, HidNpadButton_A, fldFuncDownload, &rI);
-            fldMenu->optAddButtonEvent(fldInd, HidNpadButton_X, fldFuncDriveDelete, &rI);
-            fldMenu->optAddButtonEvent(fldInd, HidNpadButton_Y, fldFuncDriveRestore, &rI);
+            fldMenu->optAddButtonEvent(fldInd, HidNpadButton_A, fldFuncDownload, &driveFldList[i]);
+            fldMenu->optAddButtonEvent(fldInd, HidNpadButton_X, fldFuncDriveDelete, &driveFldList[i]);
+            fldMenu->optAddButtonEvent(fldInd, HidNpadButton_Y, fldFuncDriveRestore, &driveFldList[i]);
         }
     }
 

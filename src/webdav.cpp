@@ -2,6 +2,8 @@
 #include "fs.h"
 #include "tinyxml2.h"
 
+#include "util.h"
+
 rfs::WebDav::WebDav(const std::string& origin, const std::string& username, const std::string& password)
     : origin(origin), username(username), password(password)
 {
@@ -249,6 +251,7 @@ std::vector<rfs::RfsItem> rfs::WebDav::parseXMLResponse(const std::string& xml) 
 
     // Get the root element
     tinyxml2::XMLElement *root = doc.RootElement();
+    // root->GetDocument()->SaveFile("sdmc://tiny.xml");
     std::string nsPrefix = getNamespacePrefix(root, "DAV:");
     nsPrefix = !nsPrefix.empty() ? nsPrefix + ":" : nsPrefix;  // Append colon if non-empty
 
@@ -271,6 +274,7 @@ std::vector<rfs::RfsItem> rfs::WebDav::parseXMLResponse(const std::string& xml) 
                 hrefText = hrefText.substr(origin.length());
             }
             item.id = hrefText;
+            item.name = util::getFilenameFromPath(item.id);
             item.parent = parentId;
         }
 
@@ -279,6 +283,7 @@ std::vector<rfs::RfsItem> rfs::WebDav::parseXMLResponse(const std::string& xml) 
             tinyxml2::XMLElement* propElem = propstatElem->FirstChildElement((nsPrefix + "prop").c_str());
             if (propElem) {
                 tinyxml2::XMLElement* displaynameElem = propElem->FirstChildElement((nsPrefix + "displayname").c_str());
+                // FIXME: 保留的原因是因为怕有正常的
                 if (displaynameElem) {
                     item.name = displaynameElem->GetText();
                 }
