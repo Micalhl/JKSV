@@ -111,6 +111,8 @@ void ui::initStrings()
     addUIString("helpFolder", 0, "[A] Select  [Y] Restore  [X] Delete   [ZR] Upload  [B] Close");
     addUIString("helpSettings", 0, "[A] Toggle   [X] Defaults   [B] Back");
 
+    addUIString("restoreSymbol", 0, "[R] ");
+
     //Y/N On/Off
     addUIString("dialogYes", 0, "Yes [A]");
     addUIString("dialogNo", 0, "No [B]");

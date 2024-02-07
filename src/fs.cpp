@@ -388,11 +388,11 @@ void fs::createNewBackup(void *a)
     std::string out;
 
     if(held & HidNpadButton_R || cfg::config["autoName"])
-        out = u->getUsernameSafe() + " - " + util::getDateTime(util::DATE_FMT_YMD);
+        out = u->getUsernameSafe() + "." + util::getDateTime(util::DATE_FMT_YMD);
     else if(held & HidNpadButton_L)
-        out = u->getUsernameSafe() + " - " + util::getDateTime(util::DATE_FMT_YDM);
+        out = u->getUsernameSafe() + "." + util::getDateTime(util::DATE_FMT_YDM);
     else if(held & HidNpadButton_ZL)
-        out = u->getUsernameSafe() + " - " + util::getDateTime(util::DATE_FMT_HOYSTE);
+        out = u->getUsernameSafe() + "." + util::getDateTime(util::DATE_FMT_HOYSTE);
     else
     {
         const std::string dict[] =
@@ -407,7 +407,7 @@ void fs::createNewBackup(void *a)
             util::generateAbbrev(d->tid),
             ".zip"
         };
-        std::string defaultText = u->getUsernameSafe() + " - " + util::getDateTime(util::DATE_FMT_YMD);
+        std::string defaultText = u->getUsernameSafe() + "." + util::getDateTime(util::DATE_FMT_YMD);
         out = util::getStringInput(SwkbdType_QWERTY, defaultText, ui::getUIString("swkbdEnterName", 0), 64, 9, dict);
         out = util::safeString(out);
     }
