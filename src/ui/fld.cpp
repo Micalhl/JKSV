@@ -336,7 +336,7 @@ void ui::fldPopulateMenu()
 
             // fldMenu->addOpt(NULL, "R: " + driveFldList[i].name);
 
-            fldMenu->addOpt(NULL, ui::getUIString("restoreSymbol", 0) + driveFldList[i].name);
+            fldMenu->addOpt(NULL, ui::getUICString("restoreSymbol", 0) + driveFldList[i].name);
 
             fldMenu->optAddButtonEvent(fldInd, HidNpadButton_A, fldFuncDownload, &driveFldList[i]);
             fldMenu->optAddButtonEvent(fldInd, HidNpadButton_X, fldFuncDriveDelete, &driveFldList[i]);
@@ -380,7 +380,7 @@ void ui::fldRefreshMenu()
         for(unsigned i = 0; i < driveFldList.size(); i++, fldInd++)
         {
             // rfs::RfsItem rI = driveFldList[i];
-            fldMenu->addOpt(NULL, ui::getUIString("restoreSymbol", 0) + driveFldList[i].name);
+            fldMenu->addOpt(NULL, ui::getUICString("restoreSymbol", 0) + driveFldList[i].name);
             // fldMenu->addOpt(NULL, "[R] " + driveFldList[i].name);
 
             fldMenu->optAddButtonEvent(fldInd, HidNpadButton_A, fldFuncDownload, &driveFldList[i]);

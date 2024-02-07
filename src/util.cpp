@@ -286,6 +286,7 @@ void util::replaceButtonsInString(std::string& rep)
     replaceStr(rep, "[DRIGHT]", "\ue0ee");
     replaceStr(rep, "[+]", "\ue0ef");
     replaceStr(rep, "[-]", "\ue0f0");
+    replaceStr(rep, "[CLOUD]", "\u2601");
 }
 
 SDL_Texture *util::createIconGeneric(const char *txt, int fontSize, bool clearBack)

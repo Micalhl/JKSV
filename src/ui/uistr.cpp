@@ -343,6 +343,7 @@ void ui::loadTrans()
     util::replaceButtonsInString(ui::strings[std::make_pair("dialogNo", 0)]);
     util::replaceButtonsInString(ui::strings[std::make_pair("dialogOK", 0)]);
     util::replaceButtonsInString(ui::strings[std::make_pair("appletModeWarning", 0)]);
+    util::replaceButtonsInString(ui::strings[std::make_pair("restoreSymbol", 0)]);
 }
 
 void ui::saveTranslationFiles(void *a)
